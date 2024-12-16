@@ -46,15 +46,16 @@ diseases_dict = {0: 'Парша яблони',
 36: 'Вирус табачной мозаики томата', 
 37: 'Вирус жёлтой курчавости листьев томата'}
 
-model = torch.jit.load('plantsDiseasesModel3.pth')
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model.to(device)
+model = torch.jit.load('plantsDiseasesModel3.pth', map_location=device)
 model.eval()
 
 print(model)
 
 transform = transforms.Compose([
     transforms.Resize(256),
+    transforms.ColorJitter(brightness=1),
     transforms.ToTensor()
 ])
 
@@ -70,14 +71,10 @@ def recognize_image(image_path):
     return predicted.item()
 
 
-folder_dir = r"C:\Users\Ainaz\.cache\kagglehub\datasets\vipoooool\new-plant-diseases-dataset\versions\2\test\test"
-folder_dir2 = r"C:\Users\Ainaz\.cache\kagglehub\datasets\vipoooool\new-plant-diseases-dataset\versions\2\New Plant Diseases Dataset(Augmented)\New Plant Diseases Dataset(Augmented)\valid\Potato___healthy"
+folder_dir = r"path\to\your\file"
 images = Path(folder_dir).glob('*.jpg')
 for image in images:
     dirname, fname = os.path.split(image)
     result = recognize_image(image)
     desease = diseases_dict[result]
     print(f"Дано {fname}. Результат {desease}. {result}")
-#result = recognize_image(r"C:\Users\Ainaz\.cache\kagglehub\datasets\vipoooool\new-plant-diseases-dataset\versions\2\test\test\CornCommonRust1.JPG")
-#result = recognize_image(r"C:\Users\Ainaz\Desktop\testJPG\1705295732_vsegda-pomnim-com-p-listya-yabloni-kartinki-foto-3.jpg")
-#print(f"Predicted class: {result}")
