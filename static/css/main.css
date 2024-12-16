@@ -1,0 +1,60 @@
+body{
+ background-color: azure;
+}
+
+header {
+    border-
+}
+/* HEADER */
+.header {
+    position: sticky;
+    padding: 20px;
+    text-align: left;
+}
+
+.header_img {
+    height: 48px;
+    weight: 48px;
+}
+
+.header-text {
+    text-align: left;
+    font-size: 18px;
+}
+
+/* PAGE */
+.page {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    background: cover;
+}
+
+/* CONTENT */
+.content {
+    flex: 1 1 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main_div {
+    background: cover;
+}
+
+.main_img {
+    width: 90%;
+    height: 90%;
+}
+
+.buttons-vertical {
+    width: 90%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    background-color: rgb(180, 240, 180);
+    text-aling: center;
+}

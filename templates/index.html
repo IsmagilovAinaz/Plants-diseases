@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form enctype="multipart/form-data" method="post">
+    <p>
+        <input type="file" name="file" class="buttons-vertical" title="" onchange="displayImage(this)"/>
+    </p>
+    <p>
+        <input type="submit" value="Отправить" class="buttons-vertical" />
+    </p>
+
+</form>
+
+<div class="main_div">
+<img id="preview" src="" alt="Здесь отобразится прикреплённое изображение" class="main_img"/>
+</div>
+
+<script>
+function displayImage(input){
+    const file = input.files[0];
+    const imageURL = URL.createObjectURL(file);
+    document.getElementById('preview').src = imageURL;
+    document.getElementById('preview').onload = () => URL.revokeObjectURL(imageURL);
+}
+</script>
+{% endblock %}
