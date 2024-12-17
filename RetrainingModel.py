@@ -14,8 +14,8 @@ if __name__ == '__main__':
         transforms.ToTensor()
     ])
 
-    training_set = datasets.ImageFolder(root=r'C:\Users\Ainaz\.cache\kagglehub\datasets\vipoooool\new-plant-diseases-dataset\versions\2\New Plant Diseases Dataset(Augmented)\New Plant Diseases Dataset(Augmented)\train', transform=transform)
-    validation_set = datasets.ImageFolder(root=r'C:\Users\Ainaz\.cache\kagglehub\datasets\vipoooool\new-plant-diseases-dataset\versions\2\New Plant Diseases Dataset(Augmented)\New Plant Diseases Dataset(Augmented)\valid', transform=transform)
+    training_set = datasets.ImageFolder(root=r'\train', transform=transform)
+    validation_set = datasets.ImageFolder(root=r'\valid', transform=transform)
 
     train_loader = DataLoader(training_set, batch_size=32, shuffle=True, num_workers=4, pin_memory=True)
     val_loader = DataLoader(validation_set, batch_size=32, num_workers=4, pin_memory=True)
