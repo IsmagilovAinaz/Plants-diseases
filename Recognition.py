@@ -6,6 +6,9 @@ from PIL import Image
 import os
 from os import listdir
 from pathlib import Path
+from sys import argv
+
+script, img_name = argv
 
 diseases_dict = {0: 'Парша яблони',
 1: 'Черная гниль яблони',
@@ -51,7 +54,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = torch.jit.load('plantsDiseasesModel3.pth', map_location=device)
 model.eval()
 
-print(model)
+#print(model)
 
 transform = transforms.Compose([
     transforms.Resize(256),
@@ -71,10 +74,8 @@ def recognize_image(image_path):
     return predicted.item()
 
 
-folder_dir = r"path\to\your\file"
-images = Path(folder_dir).glob('*.jpg')
-for image in images:
-    dirname, fname = os.path.split(image)
-    result = recognize_image(image)
-    desease = diseases_dict[result]
-    print(f"Дано {fname}. Результат {desease}. {result}")
+folder_dir = r"./inputimages/"
+image = folder_dir + img_name
+result = recognize_image(image)
+desease = diseases_dict[result]
+print(desease)

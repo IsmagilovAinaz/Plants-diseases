@@ -12,10 +12,18 @@
 </form>
 
 <div class="main_div">
-<img id="preview" src="" alt="Здесь отобразится прикреплённое изображение" class="main_img"/>
+    <h1>{{ result }}</h1>
+    <img id="preview" src="" alt="Здесь отобразится прикреплённое изображение" class="main_img"/>
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => { displayPreparedImage( {{ img }} ) });
+
+function displayPreparedImage(path){
+    document.getElementById('preimage').src = path;
+    document.getElementById('preimage').onload = () => URL.revokeObjectURL(path);
+}
+
 function displayImage(input){
     const file = input.files[0];
     const imageURL = URL.createObjectURL(file);
