@@ -5,20 +5,20 @@ import os
 
 app = Flask(__name__)
 
-ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
-UPLOAD_FOLDER = './inputimages/'
+ALLOWED_EXTENSIONS = {'jpg'}
+UPLOAD_FOLDER = './static/img/input/'
 
 @app.route("/", methods=['POST', 'GET'])
 def index():
 	if request.method == 'POST':
 		if 'file' not in request.files:
-			print('Файл не обнаружен')
-			return redirect(request.url)
+			result='Файл не обнаружен'
+			return render_template("index.html", result=result)
 
 		file = request.files['file']
 		if file.filename == '':
-			print('Файл не обнаружен')
-			return redirect(request.url)
+			result='Файл не обнаружен'
+			return render_template("index.html", result=result)
 
 		file_extension = ".jpg"
 		file_name = str(createFileName()) + file_extension
@@ -32,13 +32,8 @@ def index():
 	else:
 		return render_template("index.html")
 
-@app.route("/about")
-def about():
-	return render_template("niger.html")
-
-
 def createFileName():
-	return datetime.datetime.now()
+	return datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
 if __name__ == '__main__':
 	app.run(debug=True)

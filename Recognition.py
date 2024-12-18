@@ -74,7 +74,7 @@ def recognize_image(image_path):
     return predicted.item()
 
 
-folder_dir = r"./inputimages/"
+folder_dir = r"./static/img/input/"
 image = folder_dir + img_name
 result = recognize_image(image)
 desease = diseases_dict[result]

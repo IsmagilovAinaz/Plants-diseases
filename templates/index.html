@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form enctype="multipart/form-data" method="post">
-    <p>
-        <input type="file" name="file" class="buttons-vertical" title="" onchange="displayImage(this)"/>
+<form enctype="multipart/form-data" method="post" class="input_form">
+
+    <p class="button_container">
+        <input type="file" id="in_file" name="file" style="visibility: hidden; opacity: 0; position: absolute;" onchange="displayImage(this)"/>
+        <label for="in_file" class="buttons-vertical"> Выберите файл </label>
     </p>
-    <p>
+    <p class="button_container">
         <input type="submit" value="Отправить" class="buttons-vertical" />
     </p>
 
+    <div class="main_div">
+        <img id="preview" src="{{ img }}" class="main_img"/>
+        <p>
+            <h1>{{ result }}</h1>
+        </p>
+    </div>
+
 </form>
 
-<div class="main_div">
-    <h1>{{ result }}</h1>
-    <img id="preview" src="" alt="Здесь отобразится прикреплённое изображение" class="main_img"/>
-</div>
+
 
 <script>
-document.addEventListener('DOMContentLoaded', () => { displayPreparedImage( {{ img }} ) });
-
-function displayPreparedImage(path){
-    document.getElementById('preimage').src = path;
-    document.getElementById('preimage').onload = () => URL.revokeObjectURL(path);
-}
 
 function displayImage(input){
     const file = input.files[0];
